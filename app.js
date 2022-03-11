@@ -8,7 +8,7 @@ const log  = require('./middlewdare/logger');
 app.use(log);
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use('/public', express.static(path.join(__dirname, 'uploads')))
+v
 app.use(router);
 app.use('/', (req, res, next) => {
     res.status(404);
@@ -17,5 +17,10 @@ app.use('/', (req, res, next) => {
         message: 'Resources: ' + req.originalUrl + '  failed'
     });
 });
+const host = '0.0.0.0';
+const port = process.env.PORT || 80;
 
-app.listen(3001, () => console.log('server: http://localhost:3001'))
+app.listen(port, host, function() 
+    {console.log('server starting.....');
+});
+

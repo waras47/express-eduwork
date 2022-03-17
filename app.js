@@ -1,15 +1,18 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const router = require('./routes');
-const log  = require('./middlewdare/logger');
+const productRouter = require('./app/product/routes');
+const productRouterV2 = require('./app/product_v2/routes');
+const logger  = require('morgan');
 
 
-app.use(log);
+
+app.use(logger('dev'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
-app.use(router);
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/v1',productRouter);
+app.use('/api/v2',productRouterV2);
 app.use('/', (req, res, next) => {
     res.status(404);
     res.send ( {
@@ -17,10 +20,12 @@ app.use('/', (req, res, next) => {
         message: 'Resources: ' + req.originalUrl + '  failed'
     });
 });
-const host = '0.0.0.0';
-const port = process.env.PORT || 80;
 
-app.listen(port, host, function() 
-    {console.log('server starting.....');
-});
+app.listen(3000, ()=> console.log('server : http://localhost:3000'))
+// const host = '0.0.0.0';
+// const port = process.env.PORT || 80;
+
+// app.listen(port, host, function() 
+//     {console.log('server starting.....');
+// });
 

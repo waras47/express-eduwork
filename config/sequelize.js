@@ -4,8 +4,8 @@ const sequelize  = new Sequelize ({
     database : 'eduwork-crud-v2',
     host : 'db4free.net',
     username : 'rayhans',
-    password : 'wahyu',
-    dialect : '123123123'
+    password : '123123123',
+    dialect : 'mysql'
 });
 
 (async () => {

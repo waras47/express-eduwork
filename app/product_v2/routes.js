@@ -7,7 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 
-router.get('/product', async(req, res ) => {
+router.get('/', async(req, res ) => {
     await Product.findAll()
    .then(product => res.send(product));
 });

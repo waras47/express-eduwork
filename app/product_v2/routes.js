@@ -21,6 +21,15 @@ router.get('/product/:id', async(req, res ) => {
     .then(product => res.json(product));
 });
 
+router.delete('/product/:id', async(req, res ) => {
+    await Product.destroy({
+        where : {
+            id: req.params.id
+        }
+    })
+    .then(product => res.json(product));
+});
+
 router.post ('/product',upload.single('image'), async(req, res) => {
     const {users_id, name, price, stock, status} = req.body;
     const image =  req.file;
@@ -29,7 +38,7 @@ router.post ('/product',upload.single('image'), async(req, res) => {
         fs.renameSync(image.path, target) ;
         try {  
             await Product.sync();
-            const result = await Product.create({users_id, name, price, stock, status, image_url: `http : //localhost : 3000/${image.originalname}`});
+            const result = await Product.create({users_id, name, price, stock, status, image_url: `https://expresseduwork.herokuapp.com/${image.originalname}`});
             res.send(result);
         }catch (e){
             res.send(e);
@@ -46,10 +55,10 @@ router.put('/product/:id',upload.single('image'), async(req, res) => {
         fs.renameSync(image.path, target) ;
         try {  
             await Product.sync();
-            const result = await Product.update({users_id, name, price, stock, status, image_url: `http : //localhost : 3000/${image.originalname}`,
-            where : {
-                id: req.params.id
-            }});
+                const result = await Product.update({users_id, name, price, stock, status, image_url: `https://expresseduwork.herokuapp.com/${image.originalname}`},
+                {where : { id: req.params.id} }
+
+            );
             res.send(result);
         }catch (e){
             res.send(e);

@@ -38,7 +38,7 @@ router.post ('/product',upload.single('image'), async(req, res) => {
         fs.renameSync(image.path, target) ;
         try {  
             await Product.sync();
-            const result = await Product.create({users_id, name, price, stock, status, image_url: `https://expresseduwork.herokuapp.com/uploads/${image.originalname}`});
+            const result = await Product.create({users_id, name, price, stock, status, image_url: `http://expresseduwork.herokuapp.com/${image.originalname}`});
             res.send(result);
         }catch (e){
             res.send(e);
@@ -55,7 +55,7 @@ router.put('/product/:id',upload.single('image'), async(req, res) => {
         fs.renameSync(image.path, target) ;
         try {  
             await Product.sync();
-                const result = await Product.update({users_id, name, price, stock, status, image_url: `https://expresseduwork.herokuapp.com/uploads/${image.originalname}`},
+                const result = await Product.update({users_id, name, price, stock, status, image_url: `http://expresseduwork.herokuapp.com/${image.originalname}`},
                 {where : { id: req.params.id} }
 
             );

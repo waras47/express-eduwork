@@ -1,19 +1,20 @@
 const {Sequelize} = require('sequelize');
 
-const sequelize  = new Sequelize ({
-    database : 'rayhans',
-    host : 'db4free.net',
-    username : 'rayhans',
-    password : '123123123',
-    dialect : 'mysql'
+
+const sequelize = new Sequelize ({
+    host : 'localhost',
+    username:'root',
+    password : 'wahyu',
+    database: 'eduwork-crud-v2',
+    dialect : 'mysql' 
 });
 
 (async () => {
     try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-    } catch (error) {
-    console.error('Unable to connect to the database:', error);
+        await sequelize.authenticate();
+        console.log('Connection has been established seccusefully.');
+    } catch(error){
+        console.error ('unable to connect to the database : ', error)
     }
 })();
 
